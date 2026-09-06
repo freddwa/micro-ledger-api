@@ -20,5 +20,3 @@ return transacao
 
 export {Transacao, registrarTransacao}
 
-const t = registrarTransacao("abc-123", "deposito", 100);
-console.log(t);
