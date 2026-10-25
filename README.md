@@ -57,3 +57,20 @@ O projeto segue uma arquitetura em camadas:
 {
   "id": "id-da-conta",
 }
+
+
+## Testes automatizados
+
+O projeto tem testes automatizados escritos com o executor nativo do Node (`node:test`), sem bibliotecas externas.
+
+Para rodar:
+
+    npm test
+
+Os testes ficam em `tests/conta.test.js` e cobrem:
+
+- **Depositar:** depósito válido, conta inexistente, valor negativo e valor zero
+- **Sacar:** saque válido, conta inexistente, valor negativo e saldo insuficiente
+- **Estornar:** estorno de um depósito, com o saldo voltando ao valor anterior
+
+Os testes de erro conferem a mensagem e o código de status do `AppError`, e não apenas se um erro foi lançado.
