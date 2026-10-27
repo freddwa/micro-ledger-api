@@ -25,42 +25,39 @@ return conta
 
 function depositar(id, valor) {
     const conta = buscarPorId(id);
-     if (!conta) {
-        throw new AppError("conta nao encontrada", 404);
-        
-     }
-
-     if (valor <= 0) {
-  throw new AppError("valor invalido", 400);
-}
-
-conta.saldo = conta.saldo + valor
-salvar(conta)
-registrarTransacao(id, "deposito", valor)
-return conta
-
-}
-
-function sacar (id, valor) {
-    const conta =  buscarPorId(id);
     if (!conta) {
-        throw new AppError ("conta nao encontrada", 404);
-    
+        throw new AppError("conta nao encontrada", 404);
     }
 
-    if (valor <= 0) {
-        throw new AppError ("valor invalido", 400)
+    if (!Number.isFinite(valor) || valor <= 0) {
+        throw new AppError("valor invalido", 400);
+    }
+
+    conta.saldo = conta.saldo + valor
+    salvar(conta)
+    registrarTransacao(id, "deposito", valor)
+    return conta
+}
+
+
+function sacar(id, valor) {
+    const conta = buscarPorId(id);
+    if (!conta) {
+        throw new AppError("conta nao encontrada", 404);
+    }
+
+    if (!Number.isFinite(valor) || valor <= 0) {
+        throw new AppError("valor invalido", 400);
     }
 
     if (valor > conta.saldo) {
-        throw new AppError ("saldo insuficiente", 400)
+        throw new AppError("saldo insuficiente", 400)
     }
 
     conta.saldo = conta.saldo - valor
     salvar(conta)
     registrarTransacao(id, "saque", valor)
     return conta
-    
 }
 
 function estornar(transacaoId) {

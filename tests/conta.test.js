@@ -81,3 +81,21 @@ test("deve lançar erro ao depositar valor zero", () => {
         { message: "valor invalido", statusCode: 400 }
     )
 });
+
+
+
+test("deve lançar erro ao depositar valor que não é número", () => {
+    const conta = criarConta("Fred")
+    assert.throws(
+        () => depositar(conta.id, "abc"),
+        { message: "valor invalido", statusCode: 400 }
+    )
+});
+
+test("deve lançar erro ao sacar valor que não é número", () => {
+    const conta = criarConta("Fred")
+    assert.throws(
+        () => sacar(conta.id, "abc"),
+        { message: "valor invalido", statusCode: 400 }
+    )
+});
