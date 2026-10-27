@@ -114,3 +114,12 @@ test("deve lançar erro ao criar conta com dono só com espaços", () => {
         { message: "Dono é obrigatorio", statusCode: 400 }
     )
 });
+
+
+test("deve lançar erro ao sacar valor zero", () => {
+    const conta = criarConta("Fred")
+    assert.throws(
+        () => sacar(conta.id, 0),
+        { message: "valor invalido", statusCode: 400 }
+    )
+});
