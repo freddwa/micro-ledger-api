@@ -99,3 +99,18 @@ test("deve lançar erro ao sacar valor que não é número", () => {
         { message: "valor invalido", statusCode: 400 }
     )
 });
+
+
+test("deve lançar erro ao criar conta com dono que não é texto", () => {
+    assert.throws(
+        () => criarConta(123),
+        { message: "Dono é obrigatorio", statusCode: 400 }
+    )
+});
+
+test("deve lançar erro ao criar conta com dono só com espaços", () => {
+    assert.throws(
+        () => criarConta("   "),
+        { message: "Dono é obrigatorio", statusCode: 400 }
+    )
+});

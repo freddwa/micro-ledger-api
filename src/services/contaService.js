@@ -12,15 +12,15 @@ class Conta {
 }
 }
 
-function criarConta (dono) {
-    if (!dono) {
-        throw new AppError ("Dono é obrigatorio", 400)
+function criarConta(dono) {
+    if (typeof dono !== "string" || dono.trim() === "") {
+        throw new AppError("Dono é obrigatorio", 400)
     }
-const conta = new Conta (dono)
-salvar(conta)
-return conta
 
-    }
+    const conta = new Conta(dono)
+    salvar(conta)
+    return conta
+}
 
 
 function depositar(id, valor) {
