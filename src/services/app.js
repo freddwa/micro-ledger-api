@@ -1,6 +1,6 @@
 import http from "node:http";
-import { criarConta, depositar, sacar, estornar, buscarPorContaId } from "./services/contaService.js";
-import {criarContaController, depositarController, sacarController, estornarController, extratoController} from "./controllers/contaController.js"
+import { criarConta, depositar, sacar, estornar, buscarPorContaId } from "./contaService.js";
+import {criarContaController, depositarController, sacarController, estornarController, extratoController, listarContasController} from "../controllers/contaController.js"
 
 
 const server = http.createServer((req, res) => {
@@ -23,6 +23,10 @@ else if  (req.method === "POST" && req.url === "/contas/estornar") {
 else if (req.method === "GET" && req.url.startsWith("/contas/extrato")) {
   extratoController(req, res);
 } 
+
+else if (req.method === "GET" && req.url === "/contas") {
+  listarContasController(req, res);
+}
 
 else {
     res.end("Rota não encontrada");

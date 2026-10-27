@@ -1,4 +1,4 @@
-import {criarConta, depositar, sacar, estornar, buscarPorContaId} from "../services/contaService.js"
+import {criarConta, depositar, sacar, estornar, buscarPorContaId, listarContas} from "../services/contaService.js"
 
 function criarContaController (req, res) {
 
@@ -92,5 +92,15 @@ function extratoController (req, res) {
         res.end(JSON.stringify({ erro: erro.message }));
       }
 }
+
+function listarContasController (req, res) {
+    try {
+        const contas = listarContas();
+        res.end(JSON.stringify(contas));
+    } catch (erro) {
+        res.statusCode = erro.statusCode || 500;
+        res.end(JSON.stringify({ erro: erro.message }));
+    }
+}
     
-export {criarContaController, depositarController, sacarController, estornarController, extratoController}
+export {criarContaController, depositarController, sacarController, estornarController, extratoController, listarContasController}
