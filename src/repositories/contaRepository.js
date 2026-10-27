@@ -9,4 +9,8 @@ function buscarPorId (id) {
 
 }
 
-export { salvar, buscarPorId};
+function listarTodas () {
+    return Array.from(contas.values())
+}
+
+export { salvar, buscarPorId, listarTodas };  

@@ -1,4 +1,4 @@
-import { criarConta, depositar, sacar, estornar, buscarPorContaId} from "../src/services/contaService.js";
+import { criarConta, depositar, sacar, estornar, buscarPorContaId, listarContas} from "../src/services/contaService.js";
 import { buscarPorId} from "../src/repositories/contaRepository.js";
 import test from 'node:test';
 import assert from 'node:assert'
@@ -122,4 +122,13 @@ test("deve lançar erro ao sacar valor zero", () => {
         () => sacar(conta.id, 0),
         { message: "valor invalido", statusCode: 400 }
     )
+});
+
+
+test("deve listar as contas criadas", () => {
+    const conta1 = criarConta("Ana")
+    const conta2 = criarConta("Bia")
+    const lista = listarContas()
+    assert.ok(lista.includes(conta1))
+    assert.ok(lista.includes(conta2))
 });

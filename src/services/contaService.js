@@ -1,6 +1,6 @@
 import crypto from 'node:crypto';
 import AppError from '../errors/AppError.js'
-import {salvar, buscarPorId} from '../repositories/contaRepository.js'
+import {salvar, buscarPorId, listarTodas} from '../repositories/contaRepository.js'
 import {buscarPorContaId, buscarPorId as buscarTransacaoPorId} from "../repositories/transacaoRepository.js"
 import {registrarTransacao} from "./transacaoService.js"
 
@@ -78,8 +78,10 @@ function estornar(transacaoId) {
   return conta      
 }
 
+function listarContas () {
+    return listarTodas()
+}
 
-
-export {Conta, criarConta, depositar, sacar, estornar, buscarPorContaId}
+export {Conta, criarConta, depositar, sacar, estornar, buscarPorContaId, listarContas}
 
 
