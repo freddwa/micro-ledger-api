@@ -144,3 +144,12 @@ test("deve ficar com 70 na origem e 30 no destino depois de transferir 30", () =
     assert.strictEqual(origemAtualizada.saldo, 70);
     assert.strictEqual(destinoAtualizado.saldo, 30);
 });
+
+
+test("deve lançar erro ao transferir para conta de destino inexistente", () => {
+    const origem = criarConta("Fred")
+    assert.throws(
+    () => transferir(origem.id, "id-inexistente", 30),
+        { message: "conta de destino nao encontrada", statusCode: 404}
+    )
+});
