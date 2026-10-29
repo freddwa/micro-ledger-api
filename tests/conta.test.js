@@ -1,4 +1,4 @@
-import { criarConta, depositar, sacar, estornar, buscarPorContaId, listarContas} from "../src/services/contaService.js";
+import { criarConta, depositar, sacar, estornar, buscarPorContaId, listarContas, transferir} from "../src/services/contaService.js";
 import { buscarPorId} from "../src/repositories/contaRepository.js";
 import test from 'node:test';
 import assert from 'node:assert'
@@ -131,4 +131,16 @@ test("deve listar as contas criadas", () => {
     const lista = listarContas()
     assert.ok(lista.includes(conta1))
     assert.ok(lista.includes(conta2))
+});
+
+
+test("deve ficar com 70 na origem e 30 no destino depois de transferir 30", () => {
+    const origem = criarConta("Fred")
+    const destino = criarConta("Ana")
+    depositar(origem.id, 100);
+    transferir(origem.id, destino.id, 30);
+    const origemAtualizada = buscarPorId(origem.id);
+    const destinoAtualizado = buscarPorId(destino.id);
+    assert.strictEqual(origemAtualizada.saldo, 70);
+    assert.strictEqual(destinoAtualizado.saldo, 30);
 });

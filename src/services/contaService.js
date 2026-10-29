@@ -82,6 +82,21 @@ function listarContas () {
     return listarTodas()
 }
 
-export {Conta, criarConta, depositar, sacar, estornar, buscarPorContaId, listarContas}
+
+function transferir (origemId, destinoId, valor) {
+    if (origemId === destinoId) {
+        throw new AppError("origem e destino devem ser diferentes", 400)
+    }
+
+    if (!buscarPorId(destinoId)) {
+        throw new AppError("conta de destino nao encontrada", 404)
+    }
+
+    const origem = sacar(origemId, valor)
+    const destino = depositar(destinoId, valor)
+    return { origem, destino }
+}
+
+export {Conta, criarConta, depositar, sacar, estornar, buscarPorContaId, listarContas, transferir}
 
 
