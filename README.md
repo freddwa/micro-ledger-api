@@ -11,7 +11,7 @@ API de processamento financeiro e micro-ledger, desenvolvida em **Node.js puro**
 ## 📦 Como rodar
 
 ```bash
-git clone https://github.com/prince-devv/micro-ledger-api.git
+git clone https://github.com/freddwa/micro-ledger-api.git
 cd micro-ledger-api
 node src/app.js
 ```
