@@ -1,6 +1,6 @@
 import http from "node:http";
 import { criarConta, depositar, sacar, estornar, buscarPorContaId } from "./contaService.js";
-import {criarContaController, depositarController, sacarController, estornarController, extratoController, listarContasController} from "../controllers/contaController.js"
+import {criarContaController, depositarController, sacarController, estornarController, extratoController, listarContasController, transferirController} from "../controllers/contaController.js"
 
 
 const server = http.createServer((req, res) => {
@@ -26,6 +26,10 @@ else if (req.method === "GET" && req.url.startsWith("/contas/extrato")) {
 
 else if (req.method === "GET" && req.url === "/contas") {
   listarContasController(req, res);
+}
+
+else if (req.method === "POST" && req.url === "/contas/transferir") {
+  transferirController(req, res);
 }
 
 else {
