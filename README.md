@@ -13,7 +13,7 @@ API de processamento financeiro e micro-ledger, desenvolvida em **Node.js puro**
 ```bash
 git clone https://github.com/freddwa/micro-ledger-api.git
 cd micro-ledger-api
-node src/app.js
+node src/services/app.js
 ```
 
 O servidor sobe em `http://localhost:3000`.
@@ -42,6 +42,9 @@ O projeto segue uma arquitetura em camadas:
 }
 ```
 
+### Listar contas
+`GET /contas`
+
 ### Depositar
 `POST /contas/depositar`
 ```json
@@ -56,21 +59,37 @@ O projeto segue uma arquitetura em camadas:
 ```json
 {
   "id": "id-da-conta",
+  "valor": 50
 }
+```
 
+### Transferir
+`POST /contas/transferir`
+```json
+{
+  "origemId": "id-da-conta-de-origem",
+  "destinoId": "id-da-conta-de-destino",
+  "valor": 30
+}
+```
 
-## Testes automatizados
+## 🧪 Testes automatizados
 
 O projeto tem testes automatizados escritos com o executor nativo do Node (`node:test`), sem bibliotecas externas.
 
 Para rodar:
 
-    npm test
+```bash
+npm test
+```
 
 Os testes ficam em `tests/conta.test.js` e cobrem:
 
-- **Depositar:** depósito válido, conta inexistente, valor negativo e valor zero
-- **Sacar:** saque válido, conta inexistente, valor negativo e saldo insuficiente
+- **Criar conta:** dono que não é texto e dono só com espaços
+- **Depositar:** depósito válido, conta inexistente, valor negativo, valor zero e valor que não é número
+- **Sacar:** saque válido, conta inexistente, valor negativo, valor zero, valor que não é número e saldo insuficiente
 - **Estornar:** estorno de um depósito, com o saldo voltando ao valor anterior
+- **Listar contas:** as contas criadas aparecem na listagem
+- **Transferir:** transferência válida e conta de destino inexistente
 
 Os testes de erro conferem a mensagem e o código de status do `AppError`, e não apenas se um erro foi lançado.
