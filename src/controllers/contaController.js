@@ -124,7 +124,6 @@ function transferirController (req, res) {
 }
 
 
-
     
 export {criarContaController, depositarController, sacarController, estornarController, extratoController, listarContasController, transferirController}
 
