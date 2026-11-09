@@ -153,3 +153,16 @@ test("deve lançar erro ao transferir para conta de destino inexistente", () => 
         { message: "conta de destino nao encontrada", statusCode: 404}
     )
 });
+
+
+
+test("deve lançar erro ao estornar um depósito já sacado", () => {
+    const conta = criarConta("Fred")
+    depositar(conta.id, 100);
+    sacar(conta.id, 100);
+    const transacoes = buscarPorContaId(conta.id);
+    assert.throws(
+        () => estornar(transacoes[0].id),
+        { message: "saldo insuficiente para estornar", statusCode: 400 }
+    )
+});

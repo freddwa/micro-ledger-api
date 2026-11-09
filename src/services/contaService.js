@@ -69,13 +69,16 @@ function estornar(transacaoId) {
   const conta = buscarPorId(transacao.contaId);
 
   if (transacao.tipo === "deposito") {
+    if (conta.saldo < transacao.valor) {
+      throw new AppError("saldo insuficiente para estornar", 400)
+    }
     conta.saldo = conta.saldo - transacao.valor;
   } else {
     conta.saldo = conta.saldo + transacao.valor;
   }
 
   salvar(conta)
-  return conta      
+  return conta
 }
 
 function listarContas () {
